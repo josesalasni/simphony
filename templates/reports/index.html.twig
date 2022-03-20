@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReportsController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { padding: 2px 6px; }
+
+    .btn-tables{ text-align:center; padding-top: 50px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    <p> Please enter the Account ID you'd like to display! </p>
+    
+    <input placeholder="Account ID" id="input_id" type="text" class="validate">
+
+    <a onClick="sendReportId();" id="report" class="waves-effect waves-light btn">GET DATA</a>
+    <a href="reports" href="reports" class="waves-effect waves-light btn">Show ALL</a>
+
+    <p> Aggregated performance for All ACTIVE accounts is listed below: </p>
+
+    <table class="responsive-table">
+        <thead>
+            <tr>
+                <th>Account Name</th>
+                <th>Account ID</th>
+                <th>Spend</th>
+                <th>Clicks</th>
+                <th>Impressions</th>
+                <th>Cost per Click</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for el in data %}
+                <tr>
+                    <td>{{el.name}}</td>
+                    <td>{{el._id}}</td>
+                    <td>{{el.spent}}</td>
+                    <td>{{el.clicks}}</td>
+                    <td>{{el.impressions}}</td>
+                    <td>{{el.total}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        function sendReportId(){
+            const input = document.getElementById("input_id").value;
+            window.location='/reports?id=' + input;
+        }
+    </script>
+{% endblock %}
+

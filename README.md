@@ -1,0 +1,1 @@
+#php bin/console doctrine:mongodb:schema:create
